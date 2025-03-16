@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Cliente</title>
+    <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+    <h1>Editar Cliente</h1>
+    <form action="/editar/<%= cliente.id %>" method="POST">
+        <label for="nome">Nome:</label><br>
+        <input type="text" name="nome" id="inome" value="<%= cliente.nome %>"><br>
+
+        <label for="nascimento">Data de Nascimento:</label><br>
+        <input type="date" name="nascimento" id="inascimento" placeholder="Nascimento"
+            value="<%= cliente.nascimento %>"><br>
+
+        <label for="cpf">CPF:</label><br>
+        <input type="text" name="cpf" id="icpf" value="<%= cliente.cpf %>"><br>
+
+        <label for="endereco">Endereço:</label><br>
+        <input type="text" name="endereco" id="iendereco" value="<%= cliente.endereco %>"><br>
+
+        <label for="telefone">Telefone:</label><br>
+        <input type="text" name="telefone" id="itelefone" value="<%= cliente.telefone %>"><br>
+
+        <label for="email">Email:</label><br>
+        <input type="text" name="email" id="iemail" value="<%= cliente.email %>"><br>
+
+        <button type="submit" class="salvar">Salvar</button>
+    </form>
+</body>
+
+</html>
