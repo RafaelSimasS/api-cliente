@@ -71,6 +71,15 @@
             color: #fff;
             border-color: #007bff;
         }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 10px 0;
+            border-top: 1px solid #ccc;
+            font-size: 0.9em;
+            color: #555;
+        }
     </style>
 </head>
 
@@ -172,6 +181,10 @@
         </div>
     </div>
 
+    <footer>
+        Desenvolvido por Rafael Simas e Jorge Lucas
+    </footer>
+
     <script>
         function confirmarExclusao(clienteId) {
             var modal = document.getElementById('modalConfirmacao');
@@ -197,10 +210,6 @@
             }
         }
 
-        document.getElementById('btnPesquisar').addEventListener('click', function () {
-            const nome = document.getElementById('pesquisar').value;
-            window.location.href = `/pesquisar?nome=${encodeURIComponent(nome)}`;
-        });
     </script>
 </body>
 
