@@ -6,14 +6,92 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css">
     <title>Lista de Clientes</title>
+    <style>
+        .header-container {
+            display: flex;
+            width: 100%;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .flex-row {
+            display: flex;
+            align-items: center;
+        }
+
+        .flex-row label {
+            margin-right: 10px;
+        }
+
+        .flex-row input {
+            margin-right: 10px;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .header-container button {
+            padding: 5px 10px;
+            border: none;
+            background-color: #4CAF50;
+            color: #fff;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        .flex-row button:hover {
+            background-color: #72df75;
+        }
+
+        .pagination {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .pagination a,
+        .pagination span {
+            margin: 0 5px;
+            padding: 5px 10px;
+            text-decoration: none;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        .pagination a {
+            color: #007bff;
+        }
+
+        .pagination a:hover {
+            background-color: #f0f0f0;
+        }
+
+        .pagination span.current {
+            background-color: #007bff;
+            color: #fff;
+            border-color: #007bff;
+        }
+    </style>
 </head>
 
 <body>
     <h1>Lista de Clientes</h1>
 
-    <a href="/novo">
-        <button>Novo Cliente</button>
-    </a>
+    <div>
+        <a href="/novo">
+            <button>Novo Cliente</button>
+        </a>
+    </div>
+    <div class="header-container">
+        <form class="flex-row" action="/pesquisar" method="get">
+            <label for="pesquisar">Pesquisar Cliente:</label>
+            <input type="text" id="pesquisar" name="q" placeholder="Pesquisar por nome">
+            <button type="submit">Pesquisar</button>
+        </form>
+        <a href="/logout">
+            <button type="button">Sair</button>
+        </a>
+    </div>
     <table>
         <thead>
             <tr>
@@ -64,6 +142,26 @@
         </tbody>
     </table>
 
+    <div class="pagination">
+        <% if (currentPage> 0) { %>
+            <a href="?page=<%= currentPage - 1 %><%= pesquisa ? '&q=' + pesquisa : '' %>">Anterior</a>
+            <% } %>
+                <% for (let i=0; i < totalPages; i++) { %>
+                    <% if (i===currentPage) { %>
+                        <span class="current">
+                            <%= i + 1 %>
+                        </span>
+                        <% } else { %>
+                            <a href="?page=<%= i %><%= pesquisa ? '&q=' + pesquisa : '' %>">
+                                <%= i + 1 %>
+                            </a>
+                            <% } %>
+                                <% } %>
+                                    <% if (currentPage < totalPages - 1) { %>
+                                        <a
+                                            href="?page=<%= parseInt(currentPage) + 1 %><%= pesquisa ? '&q=' + pesquisa : '' %>">Próximo</a>
+                                        <% } %>
+    </div>
 
 
     <div id="modalConfirmacao" class="modal">
@@ -98,6 +196,11 @@
                 modal.style.display = "none";
             }
         }
+
+        document.getElementById('btnPesquisar').addEventListener('click', function () {
+            const nome = document.getElementById('pesquisar').value;
+            window.location.href = `/pesquisar?nome=${encodeURIComponent(nome)}`;
+        });
     </script>
 </body>
 
